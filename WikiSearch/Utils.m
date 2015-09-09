@@ -10,6 +10,7 @@
 
 NSString * const kErrorKey = @"isError";
 NSString * const kWikiServiceSearchResultsNotification = @"com.astha.WikiSearch.SearchResults";
+NSString * const kWikiPageUrlString = @"https://en.wikipedia.org/wiki/%@";
 
 @implementation Utils
 
@@ -28,7 +29,8 @@ NSString * const kWikiServiceSearchResultsNotification = @"com.astha.WikiSearch.
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone systemTimeZone]];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ssZ"];
+    [formatter setDateFormat:@"MMM dd, yyyy HH:mm a"];
+    [formatter setLocale:[NSLocale currentLocale]];
     
     return [formatter stringFromDate:date];
 }

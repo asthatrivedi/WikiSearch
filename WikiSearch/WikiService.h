@@ -14,6 +14,7 @@
 
 + (instancetype)sharedService;
 
+- (void)loadMoreSearchResultsForTerm:(NSString *)searchTerm;
 - (SearchResultListViewModel *)searchResultList;
 - (void)wikiSearchForTerm:(NSString *)searchTerm;
 

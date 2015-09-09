@@ -13,11 +13,16 @@
 
 @implementation SearchResultListViewModel
 
-+ (SearchResultListViewModel *)viewModelWithResultFetchObjects:(NSArray *)inFetchedObjects {
-    SearchResultListViewModel *viewModel = [[SearchResultListViewModel alloc] init];
-    viewModel.searchResultViewModels = [SearchResultListViewModel _parseFetchObjectsIntoViewModel:inFetchedObjects];
-    
-    return viewModel;
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _searchResultViewModels = [NSMutableArray array];
+    }
+    return self;
+}
+
+- (void)viewModelWithResultFetchObjects:(NSArray *)inFetchedObjects {
+    [self.searchResultViewModels addObjectsFromArray:[SearchResultListViewModel _parseFetchObjectsIntoViewModel:inFetchedObjects]];
 }
 
 #pragma mark - Private Helper Methods

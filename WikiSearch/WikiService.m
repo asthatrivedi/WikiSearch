@@ -15,10 +15,11 @@
 #import "Utils.h"
 
 NSString * const kWikiSearchAPI = @"https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch=%@";
+NSString * const kWikiSearchMoreAPI = @"https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch=%@&srprop=timestamp&sroffset=%ld";
 
 @interface WikiService ()
 
-@property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 @property (nonatomic, strong) SearchResultListViewModel *resultListModel;
 
 @end
@@ -34,6 +35,7 @@ NSString * const kWikiSearchAPI = @"https://en.wikipedia.org/w/api.php?action=qu
     
     dispatch_once(&dispatchOnce, ^{
         sharedService = [[WikiService alloc] init];
+        sharedService.searchResults = [[NSMutableArray alloc] init];
     });
     
     return sharedService;
@@ -47,45 +49,26 @@ NSString * const kWikiSearchAPI = @"https://en.wikipedia.org/w/api.php?action=qu
 
 - (void)wikiSearchForTerm:(NSString *)searchTerm {
     
-    NSString *searchTermForUrl = [WikiService _makeSearchStringReadyForUrl:searchTerm];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kWikiSearchAPI, searchTermForUrl]];
-    
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    
     __weak NSManagedObjectContext *managedContext =
         ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.searchResults removeAllObjects];
+    [self.searchResults addObjectsFromArray:[SearchResult getSearchResultFromCoreDataIfExists:searchTerm manageContext:managedContext]];
     
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSDictionary *searchDict = responseObject[@"query"];
-        self.searchResults = [SearchResult parseSearchResultJson:searchDict[@"search"]
-                                                   manageContext:managedContext];
-        
-        NSError *error = nil;
-        
-        [managedContext save:&error];
-        
-        NSString *errorString;
-        if (error) {
-            NSLog(@"error %@", error.description);
-            errorString = error.description;
+    if ([self.searchResults count] > 0) {
+        if (!self.resultListModel) {
+            self.resultListModel = [[SearchResultListViewModel alloc] init];
         }
-        else {
-            NSLog(@"success");
-            self.resultListModel = [SearchResultListViewModel viewModelWithResultFetchObjects:self.searchResults];
-        }
-        [self _contentAddedNotificationForError:errorString];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        
-        [self _contentAddedNotificationForError:error.description];
-    }];
-    
-    [operation start];
+        [self.resultListModel viewModelWithResultFetchObjects:self.searchResults];
+        [self _contentAddedNotificationForError:nil];
+    }
+    else {
+        [self _searchTermFromServer:searchTerm isReload:NO];
+    }
+}
+
+- (void)loadMoreSearchResultsForTerm:(NSString *)searchTerm {
+    [self _searchTermFromServer:searchTerm isReload:YES];
 }
 
 
@@ -113,6 +96,59 @@ NSString * const kWikiSearchAPI = @"https://en.wikipedia.org/w/api.php?action=qu
                                                postingStyle:NSPostASAP
                                                coalesceMask:NSNotificationCoalescingOnName
                                                    forModes:nil];
+}
+
+- (void)_searchTermFromServer:(NSString *)searchTerm isReload:(BOOL)isReload {
+    
+    NSString *searchTermForUrl = [WikiService _makeSearchStringReadyForUrl:searchTerm];
+    NSString *searchUrlString = [NSString stringWithFormat:kWikiSearchAPI, searchTermForUrl];
+    if (isReload) {
+        NSInteger offset = [self.searchResults count];
+        searchUrlString = [NSString stringWithFormat:kWikiSearchMoreAPI, searchTermForUrl, (long)offset];
+    }
+
+    NSURL *url = [NSURL URLWithString:searchUrlString];
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    __weak NSManagedObjectContext *managedContext =
+    ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *searchDict = responseObject[@"query"];
+        NSArray *tempArray = [SearchResult parseSearchResultJson:searchDict[@"search"]
+                                                   manageContext:managedContext];
+        [self.searchResults addObjectsFromArray:tempArray];
+        
+        NSError *error = nil;
+        
+        [managedContext save:&error];
+        
+        NSString *errorString;
+        if (error) {
+            NSLog(@"error %@", error.description);
+            errorString = error.description;
+        }
+        else {
+            NSLog(@"success");
+            if (!self.resultListModel) {
+                self.resultListModel = [[SearchResultListViewModel alloc] init];
+            }
+            [self.resultListModel viewModelWithResultFetchObjects:self.searchResults];
+        }
+        [self _contentAddedNotificationForError:errorString];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        [self _contentAddedNotificationForError:error.description];
+    }];
+    
+    [operation start];
 }
 
 @end

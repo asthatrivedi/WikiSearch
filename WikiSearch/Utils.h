@@ -10,6 +10,7 @@
 
 extern NSString * const kErrorKey;
 extern NSString * const kWikiServiceSearchResultsNotification;
+extern NSString * const kWikiPageUrlString;
 
 @interface Utils : NSObject
 

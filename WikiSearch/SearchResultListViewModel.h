@@ -10,8 +10,8 @@
 
 @interface SearchResultListViewModel : NSObject
 
-@property (nonatomic, strong) NSArray *searchResultViewModels;
+@property (nonatomic, strong) NSMutableArray *searchResultViewModels;
 
-+ (SearchResultListViewModel *)viewModelWithResultFetchObjects:(NSArray *)inFetchedObjects;
+- (void)viewModelWithResultFetchObjects:(NSArray *)inFetchedObjects;
 
 @end

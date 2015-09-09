@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="-1513" y="334"/>
         </scene>
-        <!--View Controller-->
+        <!--Wiki Page View Controller-->
         <scene sceneID="8k9-X9-2u2">
             <objects>
-                <viewController id="uMd-7x-nAy" sceneMemberID="viewController">
+                <viewController id="uMd-7x-nAy" customClass="WikiPageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="irL-TA-aZE"/>
                         <viewControllerLayoutGuide type="bottom" id="d1F-s2-hHq"/>

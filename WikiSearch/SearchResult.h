@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) NSNumber *resultId;
 
++ (NSArray *)getSearchResultFromCoreDataIfExists:(NSString *)title manageContext:(NSManagedObjectContext *)context;
 + (NSArray *)parseSearchResultJson:(NSArray *)resultJson manageContext:(NSManagedObjectContext *)context;
 
 @end

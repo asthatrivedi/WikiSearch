@@ -11,12 +11,16 @@
 #import "SearchResultListViewModel.h"
 #import "SearchResultTableViewCell.h"
 #import "Utils.h"
+#import "WikiPageViewController.h"
+#import "WikiPageViewModel.h"
 #import "WikiService.h"
 
 @interface SearchResultTableViewController ()
 
 @property (nonatomic, strong) SearchResultListViewModel *searchResults;
+@property (nonatomic, strong) NSString *selectedTitle;
 @property (weak, nonatomic) IBOutlet UISearchBar *wikiSearchBar;
+@property (nonatomic, assign) BOOL isLoadingMoreResults;
 
 @end
 
@@ -65,7 +69,24 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
     SearchResultTableViewCell *cell = (SearchResultTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kCellIdentifier
                                                                                                    forIndexPath:indexPath];
     [cell setupCellData:[self.searchResults.searchResultViewModels objectAtIndex:indexPath.row]];
+    
+    if (!self.isLoadingMoreResults && indexPath.row == [self.searchResults.searchResultViewModels count] - 1) {
+        
+        self.isLoadingMoreResults = YES;
+        [self _loadMoreSearchResults];
+    }
+    
     return cell;
+}
+
+
+#pragma mark - Table View Delegate
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SearchResultViewModel *inViewModel = [self.searchResults.searchResultViewModels objectAtIndex:indexPath.row];
+    self.selectedTitle = inViewModel.title;
+    [self performSegueWithIdentifier:@"pushWebView" sender:self];
 }
 
 #pragma mark - Search Bar Delegate
@@ -77,8 +98,8 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     searchBar.text = @"";
     [searchBar resignFirstResponder];
-    
-    self.searchResults.searchResultViewModels = @[];
+    self.selectedTitle = @"";
+    [self.searchResults.searchResultViewModels removeAllObjects];
     [self.tableView reloadData];
 }
 
@@ -87,16 +108,27 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
 - (void)_handleSearchDidCompleteNotification:(NSNotification *)notif {
     NSDictionary *userInfo = notif.userInfo;
     NSString *errorString = userInfo[kErrorKey];
+    
+    self.isLoadingMoreResults = NO;
+    
     if ([errorString length]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR" message:errorString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR"
+                                                        message:errorString
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
     }
     else {
         self.searchResults = [[WikiService sharedService] searchResultList];
+        [self.wikiSearchBar resignFirstResponder];
         [self.tableView reloadData];
     }
 }
 
+- (void)_loadMoreSearchResults {
+    [[WikiService sharedService] loadMoreSearchResultsForTerm:[self.wikiSearchBar.text capitalizedString]];
+}
 
 - (void)_searchTerm:(NSString *)search {
     [[WikiService sharedService] wikiSearchForTerm:[search capitalizedString]];
@@ -105,10 +137,16 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"pushWebView"] &&
+        [[segue destinationViewController] isKindOfClass:[WikiPageViewController class]])
+    {
+        WikiPageViewController *controller = [segue destinationViewController];
+        WikiPageViewModel *viewModel = [[WikiPageViewModel alloc] init];
+        [viewModel setupUrlString:self.selectedTitle];
+        [controller setupViewModel:viewModel];
+    }
 }
 
 

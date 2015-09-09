@@ -22,6 +22,9 @@
 		E00B02AB1B9FE37700FFE736 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02AA1B9FE37700FFE736 /* SearchResult.m */; };
 		E00B02AE1B9FF56900FFE736 /* SearchResultViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02AD1B9FF56900FFE736 /* SearchResultViewModel.m */; };
 		E00B02B11B9FF58E00FFE736 /* SearchResultListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02B01B9FF58E00FFE736 /* SearchResultListViewModel.m */; };
+		E00B02B31BA017F500FFE736 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E00B02B21BA017F500FFE736 /* WebKit.framework */; };
+		E00B02B61BA0181D00FFE736 /* WikiPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */; };
+		E00B02B91BA0189500FFE736 /* WikiPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02B81BA0189500FFE736 /* WikiPageViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,11 @@
 		E00B02AD1B9FF56900FFE736 /* SearchResultViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewModel.m; sourceTree = "<group>"; };
 		E00B02AF1B9FF58E00FFE736 /* SearchResultListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultListViewModel.h; sourceTree = "<group>"; };
 		E00B02B01B9FF58E00FFE736 /* SearchResultListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultListViewModel.m; sourceTree = "<group>"; };
+		E00B02B21BA017F500FFE736 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		E00B02B41BA0181D00FFE736 /* WikiPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiPageViewController.h; sourceTree = "<group>"; };
+		E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiPageViewController.m; sourceTree = "<group>"; };
+		E00B02B71BA0189500FFE736 /* WikiPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiPageViewModel.h; sourceTree = "<group>"; };
+		E00B02B81BA0189500FFE736 /* WikiPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiPageViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E00B02B31BA017F500FFE736 /* WebKit.framework in Frameworks */,
 				0E08D0640098D2D0DD383C08 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +97,7 @@
 		C5A1C7DFF8050B51D88F2503 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E00B02B21BA017F500FFE736 /* WebKit.framework */,
 				0DC0EDDFE42BA8E656EAAAE8 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -122,10 +132,14 @@
 				E00B029E1B9EB6A100FFE736 /* SearchResultTableViewController.m */,
 				E00B02A01B9EB6D400FFE736 /* SearchResultTableViewCell.h */,
 				E00B02A11B9EB6D400FFE736 /* SearchResultTableViewCell.m */,
+				E00B02B41BA0181D00FFE736 /* WikiPageViewController.h */,
+				E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */,
 				E00B02AF1B9FF58E00FFE736 /* SearchResultListViewModel.h */,
 				E00B02B01B9FF58E00FFE736 /* SearchResultListViewModel.m */,
 				E00B02AC1B9FF56900FFE736 /* SearchResultViewModel.h */,
 				E00B02AD1B9FF56900FFE736 /* SearchResultViewModel.m */,
+				E00B02B71BA0189500FFE736 /* WikiPageViewModel.h */,
+				E00B02B81BA0189500FFE736 /* WikiPageViewModel.m */,
 				E00B02A31B9EB70100FFE736 /* Utils.h */,
 				E00B02A41B9EB70100FFE736 /* Utils.m */,
 				E00B02A61B9EBC1F00FFE736 /* WikiService.h */,
@@ -318,8 +332,10 @@
 				E00B02AE1B9FF56900FFE736 /* SearchResultViewModel.m in Sources */,
 				E00B02A81B9EBC1F00FFE736 /* WikiService.m in Sources */,
 				E00B02771B9EB4C800FFE736 /* main.m in Sources */,
+				E00B02B91BA0189500FFE736 /* WikiPageViewModel.m in Sources */,
 				E00B02B11B9FF58E00FFE736 /* SearchResultListViewModel.m in Sources */,
 				E00B02AB1B9FE37700FFE736 /* SearchResult.m in Sources */,
+				E00B02B61BA0181D00FFE736 /* WikiPageViewController.m in Sources */,
 				E00B02A21B9EB6D400FFE736 /* SearchResultTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,6 +21,17 @@ NSString * const kTitle = @"title";
 NSString * const kTimestamp = @"timestamp";
 
 
++ (NSArray *)getSearchResultFromCoreDataIfExists:(NSString *)title manageContext:(NSManagedObjectContext *)context {
+    
+    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"SearchResult"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title contains[c] %@", title];
+    [fetch setPredicate:predicate];
+    
+    NSError *error = nil;
+    
+    return [context executeFetchRequest:fetch error:&error];
+}
+
 + (NSArray *)parseSearchResultJson:(NSArray *)resultJson manageContext:(NSManagedObjectContext *)context {
     
     NSMutableArray *inResults = [NSMutableArray array];
@@ -30,6 +41,7 @@ NSString * const kTimestamp = @"timestamp";
     
     return inResults;
 }
+
 
 #pragma mark - Private Helper Methods
 
