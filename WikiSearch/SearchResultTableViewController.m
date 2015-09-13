@@ -72,8 +72,8 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
     
     if (!self.isLoadingMoreResults && indexPath.row == [self.searchResults.searchResultViewModels count] - 1) {
         
-        self.isLoadingMoreResults = YES;
         [self _loadMoreSearchResults];
+        self.isLoadingMoreResults = YES;
     }
     
     return cell;
@@ -122,6 +122,14 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
     else {
         self.searchResults = [[WikiService sharedService] searchResultList];
         [self.wikiSearchBar resignFirstResponder];
+        if ([self.searchResults.searchResultViewModels count] == 0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:@"No search results found."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
         [self.tableView reloadData];
     }
 }
@@ -133,7 +141,6 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
 - (void)_searchTerm:(NSString *)search {
     [[WikiService sharedService] wikiSearchForTerm:[search capitalizedString]];
 }
-
 
 #pragma mark - Navigation
 

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const kErrorKey;
+extern NSString * const kQueryKey;
+extern NSString * const kSearchKey;
+extern NSString * const kSerachResultEntityKey;
 extern NSString * const kWikiServiceSearchResultsNotification;
 extern NSString * const kWikiPageUrlString;
 

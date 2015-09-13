@@ -19,12 +19,13 @@
 
 NSString * const kTitle = @"title";
 NSString * const kTimestamp = @"timestamp";
-
+NSString * const kContainsPredicate = @"title contains[c] %@";
+NSString * const kResultIDPredicate = @"resultId == %ld";
 
 + (NSArray *)getSearchResultFromCoreDataIfExists:(NSString *)title manageContext:(NSManagedObjectContext *)context {
     
     NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"SearchResult"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title contains[c] %@", title];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:kContainsPredicate, title];
     [fetch setPredicate:predicate];
     
     NSError *error = nil;
@@ -50,10 +51,10 @@ NSString * const kTimestamp = @"timestamp";
                                    manageContext:(NSManagedObjectContext *)context {
     
     // Fetch first to ensure there are no duplicate entries.
-    NSString *inTitle = resultJson[@"title"];
+    NSString *inTitle = resultJson[kTitle];
 
-    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"SearchResult"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"resultId == %ld", @(inTitle.hash)];
+    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:kSerachResultEntityKey];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:kResultIDPredicate, @(inTitle.hash)];
     [fetch setPredicate:predicate];
     
     NSError *error = nil;
@@ -66,13 +67,13 @@ NSString * const kTimestamp = @"timestamp";
         
         // Add a new entry.
         inResult =
-            (SearchResult *)[NSEntityDescription insertNewObjectForEntityForName:@"SearchResult"
+            (SearchResult *)[NSEntityDescription insertNewObjectForEntityForName:kSerachResultEntityKey
                                                          inManagedObjectContext:context];
         
         
         inResult.title = inTitle;
         inResult.resultId = @(inTitle.hash);
-        inResult.timestamp = [Utils dateForString:resultJson[@"timestamp"]];
+        inResult.timestamp = [Utils dateForString:resultJson[kTimestamp]];
     }
     else {
         inResult = [results firstObject];

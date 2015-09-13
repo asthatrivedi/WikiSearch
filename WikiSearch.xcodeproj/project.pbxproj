@@ -25,6 +25,11 @@
 		E00B02B31BA017F500FFE736 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E00B02B21BA017F500FFE736 /* WebKit.framework */; };
 		E00B02B61BA0181D00FFE736 /* WikiPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */; };
 		E00B02B91BA0189500FFE736 /* WikiPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02B81BA0189500FFE736 /* WikiPageViewModel.m */; };
+		E00B02BC1BA0A86F00FFE736 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B02BB1BA0A86F00FFE736 /* NetworkService.m */; };
+		E09BA5021BA3CC3900F371B2 /* MockNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = E09BA5011BA3CC3900F371B2 /* MockNetworkService.m */; };
+		E09BA5071BA4C40100F371B2 /* Utils_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E09BA5061BA4C40100F371B2 /* Utils_Tests.m */; };
+		E09BA50B1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E09BA50A1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m */; };
+		E09BA50D1BA4E1B700F371B2 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E09BA50C1BA4E1B700F371B2 /* libOCMock.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +77,13 @@
 		E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiPageViewController.m; sourceTree = "<group>"; };
 		E00B02B71BA0189500FFE736 /* WikiPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiPageViewModel.h; sourceTree = "<group>"; };
 		E00B02B81BA0189500FFE736 /* WikiPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiPageViewModel.m; sourceTree = "<group>"; };
+		E00B02BA1BA0A86F00FFE736 /* NetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkService.h; sourceTree = "<group>"; };
+		E00B02BB1BA0A86F00FFE736 /* NetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkService.m; sourceTree = "<group>"; };
+		E09BA5001BA3CC3900F371B2 /* MockNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockNetworkService.h; sourceTree = "<group>"; };
+		E09BA5011BA3CC3900F371B2 /* MockNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockNetworkService.m; sourceTree = "<group>"; };
+		E09BA5061BA4C40100F371B2 /* Utils_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils_Tests.m; sourceTree = "<group>"; };
+		E09BA50A1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTableViewController_Tests.m; sourceTree = "<group>"; };
+		E09BA50C1BA4E1B700F371B2 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = Libraries/libOCMock.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E09BA50D1BA4E1B700F371B2 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +110,7 @@
 		C5A1C7DFF8050B51D88F2503 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E09BA50C1BA4E1B700F371B2 /* libOCMock.a */,
 				E00B02B21BA017F500FFE736 /* WebKit.framework */,
 				0DC0EDDFE42BA8E656EAAAE8 /* libPods.a */,
 			);
@@ -128,24 +142,11 @@
 			children = (
 				E00B02781B9EB4C800FFE736 /* AppDelegate.h */,
 				E00B02791B9EB4C800FFE736 /* AppDelegate.m */,
-				E00B029D1B9EB6A100FFE736 /* SearchResultTableViewController.h */,
-				E00B029E1B9EB6A100FFE736 /* SearchResultTableViewController.m */,
-				E00B02A01B9EB6D400FFE736 /* SearchResultTableViewCell.h */,
-				E00B02A11B9EB6D400FFE736 /* SearchResultTableViewCell.m */,
-				E00B02B41BA0181D00FFE736 /* WikiPageViewController.h */,
-				E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */,
-				E00B02AF1B9FF58E00FFE736 /* SearchResultListViewModel.h */,
-				E00B02B01B9FF58E00FFE736 /* SearchResultListViewModel.m */,
-				E00B02AC1B9FF56900FFE736 /* SearchResultViewModel.h */,
-				E00B02AD1B9FF56900FFE736 /* SearchResultViewModel.m */,
-				E00B02B71BA0189500FFE736 /* WikiPageViewModel.h */,
-				E00B02B81BA0189500FFE736 /* WikiPageViewModel.m */,
-				E00B02A31B9EB70100FFE736 /* Utils.h */,
-				E00B02A41B9EB70100FFE736 /* Utils.m */,
-				E00B02A61B9EBC1F00FFE736 /* WikiService.h */,
-				E00B02A71B9EBC1F00FFE736 /* WikiService.m */,
-				E00B02A91B9FE37700FFE736 /* SearchResult.h */,
-				E00B02AA1B9FE37700FFE736 /* SearchResult.m */,
+				E00B02C11BA2789300FFE736 /* View */,
+				E00B02BF1BA2784F00FFE736 /* View Model */,
+				E00B02BE1BA2783D00FFE736 /* Model */,
+				E00B02C01BA2786E00FFE736 /* Utils */,
+				E00B02BD1BA2782F00FFE736 /* Services */,
 				E00B02811B9EB4C800FFE736 /* Main.storyboard */,
 				E00B02841B9EB4C800FFE736 /* Images.xcassets */,
 				E00B02861B9EB4C800FFE736 /* LaunchScreen.xib */,
@@ -168,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				E00B02931B9EB4C800FFE736 /* WikiSearchTests.m */,
+				E09BA5061BA4C40100F371B2 /* Utils_Tests.m */,
+				E09BA50A1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m */,
 				E00B02911B9EB4C800FFE736 /* Supporting Files */,
 			);
 			path = WikiSearchTests;
@@ -179,6 +182,63 @@
 				E00B02921B9EB4C800FFE736 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E00B02BD1BA2782F00FFE736 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E00B02A61B9EBC1F00FFE736 /* WikiService.h */,
+				E00B02A71B9EBC1F00FFE736 /* WikiService.m */,
+				E00B02BA1BA0A86F00FFE736 /* NetworkService.h */,
+				E00B02BB1BA0A86F00FFE736 /* NetworkService.m */,
+				E09BA5001BA3CC3900F371B2 /* MockNetworkService.h */,
+				E09BA5011BA3CC3900F371B2 /* MockNetworkService.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		E00B02BE1BA2783D00FFE736 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E00B02A91B9FE37700FFE736 /* SearchResult.h */,
+				E00B02AA1B9FE37700FFE736 /* SearchResult.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E00B02BF1BA2784F00FFE736 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				E00B02AF1B9FF58E00FFE736 /* SearchResultListViewModel.h */,
+				E00B02B01B9FF58E00FFE736 /* SearchResultListViewModel.m */,
+				E00B02AC1B9FF56900FFE736 /* SearchResultViewModel.h */,
+				E00B02AD1B9FF56900FFE736 /* SearchResultViewModel.m */,
+				E00B02B71BA0189500FFE736 /* WikiPageViewModel.h */,
+				E00B02B81BA0189500FFE736 /* WikiPageViewModel.m */,
+			);
+			name = "View Model";
+			sourceTree = "<group>";
+		};
+		E00B02C01BA2786E00FFE736 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E00B02A31B9EB70100FFE736 /* Utils.h */,
+				E00B02A41B9EB70100FFE736 /* Utils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		E00B02C11BA2789300FFE736 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E00B029D1B9EB6A100FFE736 /* SearchResultTableViewController.h */,
+				E00B029E1B9EB6A100FFE736 /* SearchResultTableViewController.m */,
+				E00B02A01B9EB6D400FFE736 /* SearchResultTableViewCell.h */,
+				E00B02A11B9EB6D400FFE736 /* SearchResultTableViewCell.m */,
+				E00B02B41BA0181D00FFE736 /* WikiPageViewController.h */,
+				E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		F1925C6DFC92ED383E72ADB5 /* Pods */ = {
@@ -329,11 +389,13 @@
 				E00B027A1B9EB4C800FFE736 /* AppDelegate.m in Sources */,
 				E00B027D1B9EB4C800FFE736 /* WikiSearch.xcdatamodeld in Sources */,
 				E00B02A51B9EB70100FFE736 /* Utils.m in Sources */,
+				E09BA5021BA3CC3900F371B2 /* MockNetworkService.m in Sources */,
 				E00B02AE1B9FF56900FFE736 /* SearchResultViewModel.m in Sources */,
 				E00B02A81B9EBC1F00FFE736 /* WikiService.m in Sources */,
 				E00B02771B9EB4C800FFE736 /* main.m in Sources */,
 				E00B02B91BA0189500FFE736 /* WikiPageViewModel.m in Sources */,
 				E00B02B11B9FF58E00FFE736 /* SearchResultListViewModel.m in Sources */,
+				E00B02BC1BA0A86F00FFE736 /* NetworkService.m in Sources */,
 				E00B02AB1B9FE37700FFE736 /* SearchResult.m in Sources */,
 				E00B02B61BA0181D00FFE736 /* WikiPageViewController.m in Sources */,
 				E00B02A21B9EB6D400FFE736 /* SearchResultTableViewCell.m in Sources */,
@@ -345,6 +407,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E00B02941B9EB4C800FFE736 /* WikiSearchTests.m in Sources */,
+				E09BA5071BA4C40100F371B2 /* Utils_Tests.m in Sources */,
+				E09BA50B1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,8 +529,28 @@
 			baseConfigurationReference = D03AF6D6B8C94A9D549589E5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				INFOPLIST_FILE = WikiSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -476,8 +560,28 @@
 			baseConfigurationReference = 2B2A3059422F93CAB7B4BE62 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				INFOPLIST_FILE = WikiSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -494,8 +598,23 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/usr/include",
+				);
 				INFOPLIST_FILE = WikiSearchTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/usr/lib",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WikiSearch.app/WikiSearch";
 			};
@@ -509,8 +628,23 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/usr/include",
+				);
 				INFOPLIST_FILE = WikiSearchTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/usr/lib",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WikiSearch.app/WikiSearch";
 			};

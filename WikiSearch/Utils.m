@@ -9,6 +9,9 @@
 #import "Utils.h"
 
 NSString * const kErrorKey = @"isError";
+NSString * const kQueryKey = @"query";
+NSString * const kSearchKey = @"search";
+NSString * const kSerachResultEntityKey = @"SearchResult";
 NSString * const kWikiServiceSearchResultsNotification = @"com.astha.WikiSearch.SearchResults";
 NSString * const kWikiPageUrlString = @"https://en.wikipedia.org/wiki/%@";
 
