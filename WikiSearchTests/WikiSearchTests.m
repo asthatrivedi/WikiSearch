@@ -10,9 +10,11 @@
 #import <XCTest/XCTest.h>
 #import <CoreData/CoreData.h>
 #import <OCMock/OCMock.h>
+#import <OCMock/OCMArg.h>
 
 #import "AppDelegate.h"
 #import "MockNetworkService.h"
+#import "NetworkService.h"
 #import "SearchResult.h"
 #import "Utils.h"
 #import "WikiService.h"
@@ -101,6 +103,40 @@
     XCTAssertTrue([testString isEqualToString:[WikiService _makeSearchStringReadyForUrl:testString]], @"strings not getting prepped properly.");
 }
 
+- (void)testSuccessBlockInvoked {
+    id networkMock = OCMPartialMock([NetworkService sharedService]);
+    
+    [[networkMock stub] andDo:^(NSInvocation *invocation) {
+        void (^responseHandler)(NSDictionary *successResponseDict) = nil;
+        
+        NSDictionary *inDict = [MockNetworkService serverSuccessResponse];
+        
+        [invocation getArgument:&responseHandler atIndex:3];
+        
+        responseHandler(inDict);
+    }];
+    
+    [self.mockWikiService _searchTermFromServer:@"foo%20fighters" isReload:NO];
+    
+    [self.mockWikiService verify];
+}
 
+- (void)testErrorBlockInvoked {
+    id networkMock = OCMPartialMock([NetworkService sharedService]);
+    
+    [[networkMock stub] andDo:^(NSInvocation *invocation) {
+        void (^responseHandler)(NSError *error) = nil;
+        
+        NSError *serverError = [MockNetworkService serverError];
+        
+        [invocation getArgument:&responseHandler atIndex:3];
+        
+        responseHandler(serverError);
+    }];
+    
+    [self.mockWikiService _searchTermFromServer:@"foo%20fighters" isReload:NO];
+    
+    [self.mockWikiService verify];
+}
 
 @end

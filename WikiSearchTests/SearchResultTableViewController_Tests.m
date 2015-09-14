@@ -9,23 +9,30 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
+#import "JMRMockAlertView.h"
+#import "JMRMockAlertViewVerifier.h"
+
 #import "SearchResult.h"
 #import "SearchResultViewModel.h"
 #import "SearchResultListViewModel.h"
 #import "SearchResultTableViewCell.h"
 #import "SearchResultTableViewController.h"
+#import "Utils.h"
+
 
 @interface SearchResultTableViewController (UnitTests) <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) SearchResultListViewModel *searchResults;
+@property (nonatomic, strong) Class alertViewClass;
 @property (nonatomic, assign) BOOL isLoadingMoreResults;
-@property (weak, nonatomic) IBOutlet UISearchBar *wikiSearchBar;
+@property (nonatomic, strong) SearchResultListViewModel *searchResults;
 @property (nonatomic, strong) NSString *selectedTitle;
+@property (nonatomic, strong) UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *wikiSearchBar;
 
 - (void)_loadMoreSearchResults;
 - (void)_test;
 - (void)_searchTerm:(NSString *)search;
+- (void)_handleSearchDidCompleteNotification:(NSNotification *)notif;
 
 @end
 
@@ -52,6 +59,7 @@
     
     [self.searchResultView.searchResults.searchResultViewModels addObject:vm];
     
+    self.searchResultView.alertViewClass = [JMRMockAlertView class];
 }
 
 - (void)tearDown {
@@ -119,5 +127,37 @@
     XCTAssertTrue([self.searchResultView.searchResults.searchResultViewModels count] == 0, @"search results should be cleared.");
 }
 
+- (void)testNotificationHandler {
+    
+    JMRMockAlertViewVerifier *verifier = [[JMRMockAlertViewVerifier alloc] init];
+    
+    NSNotification *notif = [[NSNotification alloc] initWithName:kWikiServiceSearchResultsNotification
+                                                          object:nil
+                                                        userInfo:@{kErrorKey : @"error"}];
+    [self.searchResultView _handleSearchDidCompleteNotification:notif];
+    
+    XCTAssertEqual(verifier.showCount, 1, @"show count should be 1.");
+    XCTAssertEqualObjects(verifier.title, @"ERROR", @"title is not correct.");
+    XCTAssertNotNil(verifier.message, @"message should not be null");
+    XCTAssertEqualObjects(verifier.cancelButtonTitle, @"OK");
+    
+    notif = nil;
+    
+    // No results test
+    
+    notif = [[NSNotification alloc] initWithName:kWikiServiceSearchResultsNotification
+                                          object:nil
+                                        userInfo:@{kErrorKey : @""}];
+    
+    [self.searchResultView.searchResults.searchResultViewModels removeAllObjects];
+    
+    [self.searchResultView _handleSearchDidCompleteNotification:notif];
+    
+    XCTAssertEqual(verifier.showCount, 2, @"show count should be 1.");
+    XCTAssertEqualObjects(verifier.title, @"", @"title is not correct.");
+    XCTAssertNotNil(verifier.message, @"No search results found.");
+    XCTAssertEqualObjects(verifier.cancelButtonTitle, @"OK");
+    
+}
 
 @end

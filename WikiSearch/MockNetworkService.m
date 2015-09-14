@@ -31,10 +31,16 @@
              @"timestamp" : [Utils stringForDate:[NSDate date]]}];
 }
 
-+ (NSDictionary *)responseReloadDictionary {
++ (NSDictionary *)serverSuccessResponse {
     
-    return @{@"title" : @"Nirvana",
-             @"timestamp" : [Utils stringForDate:[NSDate date]]};
+    return @{kQueryKey : @{kSearchKey : @[@{@"title" : @"Nirvana",
+                                            @"timestamp" : [Utils stringForDate:[NSDate date]]}]
+                           }
+             };
+}
+
++ (NSError *)serverError {
+    return [NSError errorWithDomain:@"www.google.com" code:500 userInfo:nil];
 }
 
 

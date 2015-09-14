@@ -17,6 +17,7 @@
 
 @interface SearchResultTableViewController ()
 
+@property (nonatomic, strong) Class alertViewClass;
 @property (nonatomic, strong) SearchResultListViewModel *searchResults;
 @property (nonatomic, strong) NSString *selectedTitle;
 @property (weak, nonatomic) IBOutlet UISearchBar *wikiSearchBar;
@@ -39,6 +40,8 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
                                                object:nil];
     self.tableView.estimatedRowHeight = 72;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    self.alertViewClass = [UIAlertView class];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,7 +115,7 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
     self.isLoadingMoreResults = NO;
     
     if ([errorString length]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR"
+        UIAlertView *alert = [[self.alertViewClass alloc] initWithTitle:@"ERROR"
                                                         message:errorString
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
@@ -123,7 +126,7 @@ static NSString * const kCellIdentifier = @"SearchResultCell";
         self.searchResults = [[WikiService sharedService] searchResultList];
         [self.wikiSearchBar resignFirstResponder];
         if ([self.searchResults.searchResultViewModels count] == 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+            UIAlertView *alert = [[self.alertViewClass alloc] initWithTitle:@""
                                                             message:@"No search results found."
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"

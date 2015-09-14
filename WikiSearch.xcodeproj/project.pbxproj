@@ -30,6 +30,8 @@
 		E09BA5071BA4C40100F371B2 /* Utils_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E09BA5061BA4C40100F371B2 /* Utils_Tests.m */; };
 		E09BA50B1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E09BA50A1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m */; };
 		E09BA50D1BA4E1B700F371B2 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E09BA50C1BA4E1B700F371B2 /* libOCMock.a */; };
+		E09BA5151BA61E7F00F371B2 /* JMRMockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E09BA5121BA61E7E00F371B2 /* JMRMockAlertView.m */; };
+		E09BA5161BA61E7F00F371B2 /* JMRMockAlertViewVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = E09BA5141BA61E7E00F371B2 /* JMRMockAlertViewVerifier.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,10 @@
 		E09BA5061BA4C40100F371B2 /* Utils_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils_Tests.m; sourceTree = "<group>"; };
 		E09BA50A1BA4D52D00F371B2 /* SearchResultTableViewController_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTableViewController_Tests.m; sourceTree = "<group>"; };
 		E09BA50C1BA4E1B700F371B2 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = Libraries/libOCMock.a; sourceTree = "<group>"; };
+		E09BA5111BA61E7E00F371B2 /* JMRMockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRMockAlertView.h; path = WikiSearchTests/JMRMockAlertView.h; sourceTree = SOURCE_ROOT; };
+		E09BA5121BA61E7E00F371B2 /* JMRMockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRMockAlertView.m; path = WikiSearchTests/JMRMockAlertView.m; sourceTree = SOURCE_ROOT; };
+		E09BA5131BA61E7E00F371B2 /* JMRMockAlertViewVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRMockAlertViewVerifier.h; path = WikiSearchTests/JMRMockAlertViewVerifier.h; sourceTree = SOURCE_ROOT; };
+		E09BA5141BA61E7E00F371B2 /* JMRMockAlertViewVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRMockAlertViewVerifier.m; path = WikiSearchTests/JMRMockAlertViewVerifier.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 				E00B02BF1BA2784F00FFE736 /* View Model */,
 				E00B02BE1BA2783D00FFE736 /* Model */,
 				E00B02C01BA2786E00FFE736 /* Utils */,
+				E09BA5101BA61E6200F371B2 /* Test Helpers */,
 				E00B02BD1BA2782F00FFE736 /* Services */,
 				E00B02811B9EB4C800FFE736 /* Main.storyboard */,
 				E00B02841B9EB4C800FFE736 /* Images.xcassets */,
@@ -239,6 +246,17 @@
 				E00B02B51BA0181D00FFE736 /* WikiPageViewController.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		E09BA5101BA61E6200F371B2 /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E09BA5111BA61E7E00F371B2 /* JMRMockAlertView.h */,
+				E09BA5121BA61E7E00F371B2 /* JMRMockAlertView.m */,
+				E09BA5131BA61E7E00F371B2 /* JMRMockAlertViewVerifier.h */,
+				E09BA5141BA61E7E00F371B2 /* JMRMockAlertViewVerifier.m */,
+			);
+			name = "Test Helpers";
 			sourceTree = "<group>";
 		};
 		F1925C6DFC92ED383E72ADB5 /* Pods */ = {
@@ -391,6 +409,8 @@
 				E00B02A51B9EB70100FFE736 /* Utils.m in Sources */,
 				E09BA5021BA3CC3900F371B2 /* MockNetworkService.m in Sources */,
 				E00B02AE1B9FF56900FFE736 /* SearchResultViewModel.m in Sources */,
+				E09BA5151BA61E7F00F371B2 /* JMRMockAlertView.m in Sources */,
+				E09BA5161BA61E7F00F371B2 /* JMRMockAlertViewVerifier.m in Sources */,
 				E00B02A81B9EBC1F00FFE736 /* WikiService.m in Sources */,
 				E00B02771B9EB4C800FFE736 /* main.m in Sources */,
 				E00B02B91BA0189500FFE736 /* WikiPageViewModel.m in Sources */,

@@ -11,7 +11,7 @@
 @interface MockNetworkService : NSObject
 
 + (NSArray *)responseDictionaries;
-
-+ (NSDictionary *)responseReloadDictionary;
++ (NSError *)serverError;
++ (NSDictionary *)serverSuccessResponse;
 
 @end
